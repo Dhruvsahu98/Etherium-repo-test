@@ -6,7 +6,7 @@ contract StartStopUpdateExample {
     bool public paused;
     
     function setPaused(bool _paused) public {
-                require(msg.sender == owner,"You are not the owner");
+                require(msg.sender == owner,"You are not the owner");   //When contract is paused we can send money but cannot withdraw money from root account.
                  paused = _paused;
     }
     
