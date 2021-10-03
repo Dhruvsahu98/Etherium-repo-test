@@ -2,7 +2,15 @@ pragma solidity ^0.5.13;
 
 contract StartStopUpdateExample {
     address owner;
-    constructor() public {
+    
+    bool public paused;
+    
+    function setPaused(bool _paused) public {
+                require(msg.sender == owner,"You are not the owner");
+                 paused = _paused;
+    }
+    
+     constructor() public {
         owner = msg.sender;
     }
     
@@ -12,6 +20,7 @@ contract StartStopUpdateExample {
     
     function withdrawAllMoney(address payable _to) public {
         require(msg.sender == owner,"You are not the owner");
+        require(!paused , "Your contract is paused");
         _to.transfer(address(this).balance);
     }
 }
